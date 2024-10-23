@@ -21,11 +21,11 @@ router.get('/fetch_product', function (req, res, next) {
 })
 
 
-router.post('/submit_product',upload.any(), function (req, res, next) {
+router.post('/submit_product',upload.single("picture"), function (req, res, next) {
     //req.file.filename
     console.log("hhhhhhhhhhhhhhhhhhh:",req.body)
     try {
-        pool.query("insert into products(categoryid,productname, picture) values(?,?,?)", [req.body.categoryid,req.body.productname,req.body.picture], function (error, result) {
+        pool.query("insert into products(categoryid,productname, picture) values(?,?,?)", [req.body.categoryid,req.body.productname,req.file.filename], function (error, result) {
             if (error) {
                 console.log(error)
                 res.status(200).json({ status: false, message: 'Database Error , Pls contact database Admin' })

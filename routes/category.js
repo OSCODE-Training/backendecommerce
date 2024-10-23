@@ -21,11 +21,11 @@ router.get('/fetch_category', function (req, res, next) {
 })
 
 
-router.post('/submit_category',upload.any(), function (req, res, next) {
+router.post('/submit_category',upload.single("image"), function (req, res, next) {
     //req.file.filename
-    console.log("hhhhhhhhhhhhhhhhhhh:",req.body)
+    console.log("hhhhhhhhhhhhhhhhhhh:",req.file)
     try {
-        pool.query("insert into category(categoryname, image) values(?,?)", [req.body.categoryname,req.body.picture], function (error, result) {
+        pool.query("insert into category(categoryname, image) values(?,?)", [req.body.categoryname,req.file.filename], function (error, result) {
             if (error) {
                 console.log(error)
                 res.status(200).json({ status: false, message: 'Database Error , Pls contact database Admin' })
