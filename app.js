@@ -27,7 +27,7 @@ app.use(cors());
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/category',categoryRouter);
 app.use('/product',productRouter);
 
